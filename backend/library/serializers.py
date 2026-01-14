@@ -37,3 +37,25 @@ class BorrowingCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Borrowing
         fields = ["book", "member"]
+
+    def validate(self, data):
+        """
+        Check if the book is available before attempting to save.
+        """
+        book = data["book"]
+
+        # Check availability
+        if book.available_copies < 1:
+            raise serializers.ValidationError(
+                {"book": [f"Book '{book.title}' is not currently available."]}
+            )
+
+        # Check if member already has an active loan for this book copy
+        member = data['member']
+        if Borrowing.objects.filter(
+                book=book, member=member, status='ACTIVE').exists():
+            raise serializers.ValidationError({
+                "non_field_errors": ["Member already borrowed this book."]
+            })
+
+        return data

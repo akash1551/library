@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "library",
 ]
 
 MIDDLEWARE = [
@@ -98,6 +99,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    # 1. Global Exception Handler
+    'EXCEPTION_HANDLER': 'library.exceptions.custom_exception_handler',
+
+    # 2. Global Response Renderer
+    'DEFAULT_RENDERER_CLASSES': [
+        'library.renderers.CustomJSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
