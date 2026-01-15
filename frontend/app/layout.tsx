@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
+import { Toaster } from 'react-hot-toast'; // <--- Import this
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,6 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-50 text-gray-900`}>
+        <Toaster position="top-right" />
+
         <nav className="bg-blue-600 text-white shadow-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
