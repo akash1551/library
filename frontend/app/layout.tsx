@@ -1,0 +1,43 @@
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Link from 'next/link';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Library',
+  description: 'Library Management System',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} bg-gray-50 text-gray-900`}>
+        <nav className="bg-blue-600 text-white shadow-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center">
+                <Link href="/" className="text-xl font-bold">
+                  📚 Library App
+                </Link>
+                <div className="ml-10 flex items-baseline space-x-4">
+                  <Link href="/books" className="hover:bg-blue-700 px-3 py-2 rounded-md">Books</Link>
+                  <Link href="/members" className="hover:bg-blue-700 px-3 py-2 rounded-md">Members</Link>
+                  <Link href="/borrowings" className="hover:bg-blue-700 px-3 py-2 rounded-md">Circulation</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          {children}
+        </main>
+      </body>
+    </html>
+  );
+}
