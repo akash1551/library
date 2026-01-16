@@ -9,7 +9,7 @@ class Member(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, blank=True)
     address = models.TextField(blank=True)
-    joined_date = models.DateField(auto_now_add=True)
+    joined_date = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:

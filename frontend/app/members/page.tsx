@@ -10,8 +10,8 @@ interface Member {
   last_name: string;
   email: string;
   phone: string;
-  join_date: string;   // Standardized to join_date for consistency
-  is_active: boolean;  // Backend sends is_active in API responses
+  joined_date: string;
+  is_active: boolean;
 }
 
 export default function MembersPage() {
@@ -27,7 +27,7 @@ export default function MembersPage() {
     last_name: '',
     email: '',
     phone: '',
-    join_date: '',
+    joined_date: '',
     is_active: true
   });
 
@@ -48,12 +48,12 @@ export default function MembersPage() {
         last_name: string;
         email: string;
         phone: string;
-        join_date?: string;
         joined_date?: string;
+        join_date?: string;
         is_active: boolean;
       }) => ({
         ...member,
-        join_date: member.join_date || member.joined_date, // Handle both field names during transition
+        joined_date: member.joined_date || member.join_date, // Handle both field names during transition
       }));
       
       setMembers(mappedMembers);
@@ -73,7 +73,7 @@ export default function MembersPage() {
       last_name: member.last_name,
       email: member.email,
       phone: member.phone,
-      join_date: member.join_date ? new Date(member.join_date).toISOString().split('T')[0] : '',
+      joined_date: member.joined_date ? new Date(member.joined_date).toISOString().split('T')[0] : '',
       is_active: member.is_active
     });
     // Scroll to top to see form
@@ -84,7 +84,7 @@ export default function MembersPage() {
   // Cancel Edit Mode
   const handleCancelEdit = () => {
     setEditingMemberId(null);
-    setFormData({ first_name: '', last_name: '', email: '', phone: '', join_date: '', is_active: true });
+    setFormData({ first_name: '', last_name: '', email: '', phone: '', joined_date: '', is_active: true });
   };
 
   // Handle Form Submit (Create OR Update)
@@ -98,8 +98,8 @@ export default function MembersPage() {
         last_name: formData.last_name,
         email: formData.email,
         phone: formData.phone,
-        join_date: formData.join_date, // Backend expects join_date
-        is_active: formData.is_active // Backend expects is_active as boolean
+        joined_date: formData.joined_date,
+        is_active: formData.is_active
       };
 
       if (editingMemberId) {
@@ -113,7 +113,7 @@ export default function MembersPage() {
       }
       
       // Reset and Refresh
-      handleCancelEdit(); // Clears form
+      handleCancelEdit();
       fetchMembers();
       
     } catch (error: unknown) {
@@ -187,8 +187,8 @@ export default function MembersPage() {
               type="date"
               required
               className="w-full border border-gray-300 rounded px-3 py-2"
-              value={formData.join_date}
-              onChange={(e) => setFormData({ ...formData, join_date: e.target.value })}
+              value={formData.joined_date}
+              onChange={(e) => setFormData({ ...formData, joined_date: e.target.value })}
             />
           </div>
           <div>
@@ -237,7 +237,7 @@ export default function MembersPage() {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">{member.phone}</td>
                   <td className="px-6 py-4 text-sm text-gray-500">
-                    {new Date(member.join_date).toLocaleDateString()}
+                    {new Date(member.joined_date).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4">
                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
