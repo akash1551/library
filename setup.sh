@@ -41,7 +41,7 @@ fi
 
 # 3. Build and Start Containers
 echo -e "${BLUE}Building and starting containers (this may take a minute)...${NC}"
-docker compose up -d --build
+docker-compose up -d --build
 
 # 4. Wait for Database to be ready
 echo -e "${BLUE}Waiting for database to initialize...${NC}"
@@ -49,10 +49,10 @@ sleep 5
 
 # 5. Run Migrations
 echo -e "${BLUE}Running database migrations...${NC}"
-docker compose exec backend python manage.py migrate
+docker-compose exec backend python manage.py migrate
 
 # 6. Success Message
 echo -e "${GREEN}=== Setup Complete! ===${NC}"
 echo -e "Frontend: ${YELLOW}http://localhost:3000${NC}"
 echo -e "Backend:  ${YELLOW}http://localhost:8000/api/v1/${NC}"
-echo -e "To stop the app, run: ${YELLOW}docker compose down${NC}"
+echo -e "To stop the app, run: ${YELLOW}docker-compose down${NC}"
