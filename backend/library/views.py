@@ -43,10 +43,13 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         """
         queryset = Borrowing.objects.all()
         member_id = self.request.query_params.get("member_id")
+        book_id = self.request.query_params.get("book_id")
         loan_status = self.request.query_params.get("status")
 
         if member_id:
             queryset = queryset.filter(member_id=member_id)
+        if book_id:
+            queryset = queryset.filter(book_id=book_id)
         if loan_status:
             queryset = queryset.filter(status=loan_status)
 

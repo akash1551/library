@@ -37,3 +37,10 @@ frontend/.env.local
 # --- Docker ---
 # If you map volumes to local folders, ignore them here
 # postgres_data/
+
+venv/
+node_modules/
+.env
+__pycache__/
+*.sqlite3
+.DS_Store
