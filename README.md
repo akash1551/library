@@ -1,4 +1,4 @@
-# Neighborhood Library Management System
+# Library Management System
 
 A full-stack library management application built with **Django (Python)**, **PostgreSQL**, and **Next.js (React)**.
 
